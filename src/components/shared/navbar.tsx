@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Heart, Search, ShoppingCart, User } from "lucide-react";
+import { Search, ShoppingCart, User } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,7 +14,6 @@ import { SidebarTrigger } from "@/components/ui/sidebar";
 
 export function Navbar() {
 	// Mock data - replace with actual state management
-	const cartItemsCount = 3;
 	const isLoggedIn = true;
 	const userRole = "customer"; // customer, admin, vet
 
@@ -61,14 +60,6 @@ export function Navbar() {
 						<Button variant="ghost" size="icon" className="relative">
 							<Link to="/cart">
 								<ShoppingCart className="h-5 w-5" />
-								{cartItemsCount > 0 && (
-									<Badge
-										variant="destructive"
-										className="absolute -top-1 -right-1 h-5 w-5 rounded-full p-0 text-xs"
-									>
-										{cartItemsCount}
-									</Badge>
-								)}
 								<span className="sr-only">Shopping cart</span>
 							</Link>
 						</Button>
@@ -83,9 +74,6 @@ export function Navbar() {
 									</Button>
 								</DropdownMenuTrigger>
 								<DropdownMenuContent align="end" className="w-56">
-									<DropdownMenuItem asChild>
-										<Link to="/profile">Profile</Link>
-									</DropdownMenuItem>
 									<DropdownMenuItem asChild>
 										<Link to="/orders">My Orders</Link>
 									</DropdownMenuItem>

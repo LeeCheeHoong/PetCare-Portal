@@ -34,7 +34,7 @@ import {
 
 const paymentSchema = z
 	.object({
-		type: z.enum(["card", "apple_pay"]),
+		type: z.enum(["card"]),
 		// Card fields
 		cardNumber: z.string().optional(),
 		expiryMonth: z.string().optional(),
@@ -78,9 +78,8 @@ export function PaymentForm({
 	const { paymentMethods, isLoadingPaymentMethods, paymentMethodsError } =
 		useCheckout();
 	const [useNewCard, setUseNewCard] = useState(false);
-	const [selectedPaymentType, setSelectedPaymentType] = useState<
-		"card" | "apple_pay"
-	>("card");
+	const [selectedPaymentType, setSelectedPaymentType] =
+		useState<"card">("card");
 
 	const form = useForm<PaymentFormData>({
 		resolver: zodResolver(paymentSchema),
@@ -112,14 +111,14 @@ export function PaymentForm({
 			} else {
 				// New card
 				paymentMethod = {
-					id: `card_\${Date.now()}`, // Mock ID
+					id: `card_${Date.now()}`, // Mock ID
 					type: "card",
 					isDefault: false,
-					cardNumber: data.cardNumber!,
-					expiryMonth: data.expiryMonth!,
-					expiryYear: data.expiryYear!,
-					cvv: data.cvv!,
-					cardholderName: data.cardholderName!,
+					cardNumber: data.cardNumber,
+					expiryMonth: data.expiryMonth,
+					expiryYear: data.expiryYear,
+					cvv: data.cvv,
+					cardholderName: data.cardholderName,
 					// For display purposes
 					last4: data.cardNumber!.slice(-4),
 					brand: getCardBrand(data.cardNumber!),
@@ -128,7 +127,7 @@ export function PaymentForm({
 		} else {
 			// PayPal or Apple Pay
 			paymentMethod = {
-				id: `\${data.type}_\${Date.now()}`,
+				id: `${data.type}_${Date.now()}`,
 				type: data.type,
 				isDefault: false,
 			};
@@ -211,32 +210,18 @@ export function PaymentForm({
 											value={field.value}
 											onValueChange={(value) => {
 												field.onChange(value);
-												setSelectedPaymentType(
-													value as "card" | "paypal" | "apple_pay",
-												);
+												setSelectedPaymentType(value as "card");
 											}}
 											className="grid grid-cols-1 gap-4"
 										>
 											<div className="flex items-center space-x-2 border rounded-lg p-4">
-												<RadioGroupItem value="card" id="card" />
+												<RadioGroupItem value="card" />
 												<Label
 													htmlFor="card"
 													className="flex items-center gap-2 cursor-pointer flex-1"
 												>
 													<CreditCard className="h-5 w-5" />
 													<span>Credit/Debit Card</span>
-												</Label>
-											</div>
-											<div className="flex items-center space-x-2 border rounded-lg p-4">
-												<RadioGroupItem value="apple_pay" id="apple_pay" />
-												<Label
-													htmlFor="apple_pay"
-													className="flex items-center gap-2 cursor-pointer flex-1"
-												>
-													<div className="w-5 h-5 bg-black rounded text-white text-xs flex items-center justify-center">
-														A
-													</div>
-													<span>Apple Pay</span>
 												</Label>
 											</div>
 										</RadioGroup>
@@ -460,35 +445,6 @@ export function PaymentForm({
 										</div>
 									</div>
 								)}
-							</div>
-						)}
-
-						{/* PayPal */}
-						{selectedPaymentType === "paypal" && (
-							<div className="text-center py-8 border rounded-lg bg-gray-50">
-								<div className="space-y-4">
-									<div className="w-16 h-16 bg-blue-600 rounded-full mx-auto flex items-center justify-center">
-										<span className="text-white text-xl font-bold">PayPal</span>
-									</div>
-									<p className="text-gray-600">
-										You'll be redirected to PayPal to complete your payment
-										securely.
-									</p>
-								</div>
-							</div>
-						)}
-
-						{/* Apple Pay */}
-						{selectedPaymentType === "apple_pay" && (
-							<div className="text-center py-8 border rounded-lg bg-gray-50">
-								<div className="space-y-4">
-									<div className="w-16 h-16 bg-black rounded-full mx-auto flex items-center justify-center">
-										<span className="text-white text-xl font-bold">Pay</span>
-									</div>
-									<p className="text-gray-600">
-										Use Touch ID or Face ID to pay with Apple Pay.
-									</p>
-								</div>
 							</div>
 						)}
 

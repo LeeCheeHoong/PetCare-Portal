@@ -16,9 +16,9 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useCart } from "../cart/hooks/useCart";
 
 export const ProductDetailPage = () => {
-	// TODO
 	const { productId } = useParams({ from: "/(public)/products/$productId" });
 
 	const [quantity, setQuantity] = useState(1);
@@ -26,6 +26,8 @@ export const ProductDetailPage = () => {
 
 	const { product, relatedProducts, isLoading, error } =
 		useProductPageData(productId);
+
+	const { addItem } = useCart();
 
 	useEffect(() => {
 		if (error) {
@@ -41,8 +43,7 @@ export const ProductDetailPage = () => {
 
 	const handleAddToCart = () => {
 		if (!product.data) return;
-		console.log(`Adding ${quantity} of product ${product.data.id} to cart`);
-		// Add to cart logic here
+		addItem(product.data.id, quantity);
 	};
 
 	// Loading state
@@ -147,6 +148,7 @@ export const ProductDetailPage = () => {
 											? "border-primary"
 											: "border-muted hover:border-muted-foreground"
 									}`}
+									type="button"
 								>
 									<img
 										src={image}

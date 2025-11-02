@@ -11,35 +11,33 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as VetScheduleRouteImport } from './routes/vet/schedule'
-import { Route as VetProfileRouteImport } from './routes/vet/profile'
 import { Route as VetDashboardRouteImport } from './routes/vet/dashboard'
 import { Route as AdminDashboardRouteImport } from './routes/admin/dashboard'
-import { Route as publicSearchRouteImport } from './routes/(public)/search'
-import { Route as customerProfileRouteImport } from './routes/(customer)/profile'
 import { Route as customerCheckoutRouteImport } from './routes/(customer)/checkout'
 import { Route as customerCartRouteImport } from './routes/(customer)/cart'
-import { Route as VetPatientsRouteRouteImport } from './routes/vet/patients/route'
-import { Route as VetAppointmentsRouteRouteImport } from './routes/vet/appointments/route'
-import { Route as AdminUsersRouteRouteImport } from './routes/admin/users/route'
-import { Route as customerPetsRouteRouteImport } from './routes/(customer)/pets/route'
-import { Route as customerAppointmentsRouteRouteImport } from './routes/(customer)/appointments/route'
+import { Route as VetAppointmentsIndexRouteImport } from './routes/vet/appointments/index'
 import { Route as AdminProductsIndexRouteImport } from './routes/admin/products/index'
 import { Route as AdminOrdersIndexRouteImport } from './routes/admin/orders/index'
+import { Route as AdminAdoptionIndexRouteImport } from './routes/admin/adoption/index'
 import { Route as publicProductsIndexRouteImport } from './routes/(public)/products/index'
+import { Route as publicAdoptionIndexRouteImport } from './routes/(public)/adoption/index'
+import { Route as customerPetsIndexRouteImport } from './routes/(customer)/pets/index'
 import { Route as customerOrdersIndexRouteImport } from './routes/(customer)/orders/index'
-import { Route as VetPatientsPetIdRouteImport } from './routes/vet/patients/$petId'
+import { Route as customerAppointmentsIndexRouteImport } from './routes/(customer)/appointments/index'
 import { Route as VetAppointmentsAppointmentIdRouteImport } from './routes/vet/appointments/$appointmentId'
-import { Route as AdminUsersUserIdRouteImport } from './routes/admin/users/$userId'
 import { Route as AdminProductsNewRouteImport } from './routes/admin/products/new'
-import { Route as AdminOrdersOrderIdRouteImport } from './routes/admin/orders/$orderId'
+import { Route as AdminAdoptionNewRouteImport } from './routes/admin/adoption/new'
+import { Route as AdminAdoptionApplicationsRouteImport } from './routes/admin/adoption/applications'
 import { Route as publicProductsProductIdRouteImport } from './routes/(public)/products/$productId'
-import { Route as publicCategoriesCategoryIdRouteImport } from './routes/(public)/categories/$categoryId'
 import { Route as publicAuthRegisterRouteImport } from './routes/(public)/auth/register'
 import { Route as publicAuthLoginRouteImport } from './routes/(public)/auth/login'
+import { Route as publicAdoptionPetIdRouteImport } from './routes/(public)/adoption/$petId'
+import { Route as customerPetsNewRouteImport } from './routes/(customer)/pets/new'
 import { Route as customerPetsPetIdRouteImport } from './routes/(customer)/pets/$petId'
 import { Route as customerOrdersOrderIdRouteImport } from './routes/(customer)/orders/$orderId'
-import { Route as customerAppointmentsAppointmentIdRouteImport } from './routes/(customer)/appointments/$appointmentId'
+import { Route as customerAppointmentsNewRouteImport } from './routes/(customer)/appointments/new'
 import { Route as AdminProductsProductIdEditRouteImport } from './routes/admin/products/$productId.edit'
+import { Route as AdminAdoptionPetIdEditRouteImport } from './routes/admin/adoption/$petId.edit'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -49,11 +47,6 @@ const IndexRoute = IndexRouteImport.update({
 const VetScheduleRoute = VetScheduleRouteImport.update({
   id: '/vet/schedule',
   path: '/vet/schedule',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const VetProfileRoute = VetProfileRouteImport.update({
-  id: '/vet/profile',
-  path: '/vet/profile',
   getParentRoute: () => rootRouteImport,
 } as any)
 const VetDashboardRoute = VetDashboardRouteImport.update({
@@ -66,16 +59,6 @@ const AdminDashboardRoute = AdminDashboardRouteImport.update({
   path: '/admin/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
-const publicSearchRoute = publicSearchRouteImport.update({
-  id: '/(public)/search',
-  path: '/search',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const customerProfileRoute = customerProfileRouteImport.update({
-  id: '/(customer)/profile',
-  path: '/profile',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const customerCheckoutRoute = customerCheckoutRouteImport.update({
   id: '/(customer)/checkout',
   path: '/checkout',
@@ -86,32 +69,11 @@ const customerCartRoute = customerCartRouteImport.update({
   path: '/cart',
   getParentRoute: () => rootRouteImport,
 } as any)
-const VetPatientsRouteRoute = VetPatientsRouteRouteImport.update({
-  id: '/vet/patients',
-  path: '/vet/patients',
+const VetAppointmentsIndexRoute = VetAppointmentsIndexRouteImport.update({
+  id: '/vet/appointments/',
+  path: '/vet/appointments/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const VetAppointmentsRouteRoute = VetAppointmentsRouteRouteImport.update({
-  id: '/vet/appointments',
-  path: '/vet/appointments',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminUsersRouteRoute = AdminUsersRouteRouteImport.update({
-  id: '/admin/users',
-  path: '/admin/users',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const customerPetsRouteRoute = customerPetsRouteRouteImport.update({
-  id: '/(customer)/pets',
-  path: '/pets',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const customerAppointmentsRouteRoute =
-  customerAppointmentsRouteRouteImport.update({
-    id: '/(customer)/appointments',
-    path: '/appointments',
-    getParentRoute: () => rootRouteImport,
-  } as any)
 const AdminProductsIndexRoute = AdminProductsIndexRouteImport.update({
   id: '/admin/products/',
   path: '/admin/products/',
@@ -122,9 +84,24 @@ const AdminOrdersIndexRoute = AdminOrdersIndexRouteImport.update({
   path: '/admin/orders/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminAdoptionIndexRoute = AdminAdoptionIndexRouteImport.update({
+  id: '/admin/adoption/',
+  path: '/admin/adoption/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const publicProductsIndexRoute = publicProductsIndexRouteImport.update({
   id: '/(public)/products/',
   path: '/products/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const publicAdoptionIndexRoute = publicAdoptionIndexRouteImport.update({
+  id: '/(public)/adoption/',
+  path: '/adoption/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const customerPetsIndexRoute = customerPetsIndexRouteImport.update({
+  id: '/(customer)/pets/',
+  path: '/pets/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const customerOrdersIndexRoute = customerOrdersIndexRouteImport.update({
@@ -132,43 +109,39 @@ const customerOrdersIndexRoute = customerOrdersIndexRouteImport.update({
   path: '/orders/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const VetPatientsPetIdRoute = VetPatientsPetIdRouteImport.update({
-  id: '/$petId',
-  path: '/$petId',
-  getParentRoute: () => VetPatientsRouteRoute,
-} as any)
+const customerAppointmentsIndexRoute =
+  customerAppointmentsIndexRouteImport.update({
+    id: '/(customer)/appointments/',
+    path: '/appointments/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const VetAppointmentsAppointmentIdRoute =
   VetAppointmentsAppointmentIdRouteImport.update({
-    id: '/$appointmentId',
-    path: '/$appointmentId',
-    getParentRoute: () => VetAppointmentsRouteRoute,
+    id: '/vet/appointments/$appointmentId',
+    path: '/vet/appointments/$appointmentId',
+    getParentRoute: () => rootRouteImport,
   } as any)
-const AdminUsersUserIdRoute = AdminUsersUserIdRouteImport.update({
-  id: '/$userId',
-  path: '/$userId',
-  getParentRoute: () => AdminUsersRouteRoute,
-} as any)
 const AdminProductsNewRoute = AdminProductsNewRouteImport.update({
   id: '/admin/products/new',
   path: '/admin/products/new',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AdminOrdersOrderIdRoute = AdminOrdersOrderIdRouteImport.update({
-  id: '/$orderId',
-  path: '/$orderId',
-  getParentRoute: () => AdminOrdersRouteRoute,
+const AdminAdoptionNewRoute = AdminAdoptionNewRouteImport.update({
+  id: '/admin/adoption/new',
+  path: '/admin/adoption/new',
+  getParentRoute: () => rootRouteImport,
 } as any)
+const AdminAdoptionApplicationsRoute =
+  AdminAdoptionApplicationsRouteImport.update({
+    id: '/admin/adoption/applications',
+    path: '/admin/adoption/applications',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const publicProductsProductIdRoute = publicProductsProductIdRouteImport.update({
   id: '/(public)/products/$productId',
   path: '/products/$productId',
   getParentRoute: () => rootRouteImport,
 } as any)
-const publicCategoriesCategoryIdRoute =
-  publicCategoriesCategoryIdRouteImport.update({
-    id: '/(public)/categories/$categoryId',
-    path: '/categories/$categoryId',
-    getParentRoute: () => rootRouteImport,
-  } as any)
 const publicAuthRegisterRoute = publicAuthRegisterRouteImport.update({
   id: '/(public)/auth/register',
   path: '/auth/register',
@@ -179,256 +152,262 @@ const publicAuthLoginRoute = publicAuthLoginRouteImport.update({
   path: '/auth/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const publicAdoptionPetIdRoute = publicAdoptionPetIdRouteImport.update({
+  id: '/(public)/adoption/$petId',
+  path: '/adoption/$petId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const customerPetsNewRoute = customerPetsNewRouteImport.update({
+  id: '/(customer)/pets/new',
+  path: '/pets/new',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const customerPetsPetIdRoute = customerPetsPetIdRouteImport.update({
-  id: '/$petId',
-  path: '/$petId',
-  getParentRoute: () => customerPetsRouteRoute,
+  id: '/(customer)/pets/$petId',
+  path: '/pets/$petId',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const customerOrdersOrderIdRoute = customerOrdersOrderIdRouteImport.update({
   id: '/(customer)/orders/$orderId',
   path: '/orders/$orderId',
   getParentRoute: () => rootRouteImport,
 } as any)
-const customerAppointmentsAppointmentIdRoute =
-  customerAppointmentsAppointmentIdRouteImport.update({
-    id: '/$appointmentId',
-    path: '/$appointmentId',
-    getParentRoute: () => customerAppointmentsRouteRoute,
-  } as any)
+const customerAppointmentsNewRoute = customerAppointmentsNewRouteImport.update({
+  id: '/(customer)/appointments/new',
+  path: '/appointments/new',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminProductsProductIdEditRoute =
   AdminProductsProductIdEditRouteImport.update({
     id: '/admin/products/$productId/edit',
     path: '/admin/products/$productId/edit',
     getParentRoute: () => rootRouteImport,
   } as any)
+const AdminAdoptionPetIdEditRoute = AdminAdoptionPetIdEditRouteImport.update({
+  id: '/admin/adoption/$petId/edit',
+  path: '/admin/adoption/$petId/edit',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/appointments': typeof customerAppointmentsRouteRouteWithChildren
-  '/pets': typeof customerPetsRouteRouteWithChildren
-  '/admin/users': typeof AdminUsersRouteRouteWithChildren
-  '/vet/appointments': typeof VetAppointmentsRouteRouteWithChildren
-  '/vet/patients': typeof VetPatientsRouteRouteWithChildren
   '/cart': typeof customerCartRoute
   '/checkout': typeof customerCheckoutRoute
-  '/profile': typeof customerProfileRoute
-  '/search': typeof publicSearchRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/vet/dashboard': typeof VetDashboardRoute
-  '/vet/profile': typeof VetProfileRoute
   '/vet/schedule': typeof VetScheduleRoute
-  '/appointments/$appointmentId': typeof customerAppointmentsAppointmentIdRoute
+  '/appointments/new': typeof customerAppointmentsNewRoute
   '/orders/$orderId': typeof customerOrdersOrderIdRoute
   '/pets/$petId': typeof customerPetsPetIdRoute
+  '/pets/new': typeof customerPetsNewRoute
+  '/adoption/$petId': typeof publicAdoptionPetIdRoute
   '/auth/login': typeof publicAuthLoginRoute
   '/auth/register': typeof publicAuthRegisterRoute
-  '/categories/$categoryId': typeof publicCategoriesCategoryIdRoute
   '/products/$productId': typeof publicProductsProductIdRoute
-  '/admin/orders/$orderId': typeof AdminOrdersOrderIdRoute
+  '/admin/adoption/applications': typeof AdminAdoptionApplicationsRoute
+  '/admin/adoption/new': typeof AdminAdoptionNewRoute
   '/admin/products/new': typeof AdminProductsNewRoute
-  '/admin/users/$userId': typeof AdminUsersUserIdRoute
   '/vet/appointments/$appointmentId': typeof VetAppointmentsAppointmentIdRoute
-  '/vet/patients/$petId': typeof VetPatientsPetIdRoute
+  '/appointments': typeof customerAppointmentsIndexRoute
   '/orders': typeof customerOrdersIndexRoute
+  '/pets': typeof customerPetsIndexRoute
+  '/adoption': typeof publicAdoptionIndexRoute
   '/products': typeof publicProductsIndexRoute
+  '/admin/adoption': typeof AdminAdoptionIndexRoute
   '/admin/orders': typeof AdminOrdersIndexRoute
   '/admin/products': typeof AdminProductsIndexRoute
+  '/vet/appointments': typeof VetAppointmentsIndexRoute
+  '/admin/adoption/$petId/edit': typeof AdminAdoptionPetIdEditRoute
   '/admin/products/$productId/edit': typeof AdminProductsProductIdEditRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/appointments': typeof customerAppointmentsRouteRouteWithChildren
-  '/pets': typeof customerPetsRouteRouteWithChildren
-  '/admin/users': typeof AdminUsersRouteRouteWithChildren
-  '/vet/appointments': typeof VetAppointmentsRouteRouteWithChildren
-  '/vet/patients': typeof VetPatientsRouteRouteWithChildren
   '/cart': typeof customerCartRoute
   '/checkout': typeof customerCheckoutRoute
-  '/profile': typeof customerProfileRoute
-  '/search': typeof publicSearchRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/vet/dashboard': typeof VetDashboardRoute
-  '/vet/profile': typeof VetProfileRoute
   '/vet/schedule': typeof VetScheduleRoute
-  '/appointments/$appointmentId': typeof customerAppointmentsAppointmentIdRoute
+  '/appointments/new': typeof customerAppointmentsNewRoute
   '/orders/$orderId': typeof customerOrdersOrderIdRoute
   '/pets/$petId': typeof customerPetsPetIdRoute
+  '/pets/new': typeof customerPetsNewRoute
+  '/adoption/$petId': typeof publicAdoptionPetIdRoute
   '/auth/login': typeof publicAuthLoginRoute
   '/auth/register': typeof publicAuthRegisterRoute
-  '/categories/$categoryId': typeof publicCategoriesCategoryIdRoute
   '/products/$productId': typeof publicProductsProductIdRoute
-  '/admin/orders/$orderId': typeof AdminOrdersOrderIdRoute
+  '/admin/adoption/applications': typeof AdminAdoptionApplicationsRoute
+  '/admin/adoption/new': typeof AdminAdoptionNewRoute
   '/admin/products/new': typeof AdminProductsNewRoute
-  '/admin/users/$userId': typeof AdminUsersUserIdRoute
   '/vet/appointments/$appointmentId': typeof VetAppointmentsAppointmentIdRoute
-  '/vet/patients/$petId': typeof VetPatientsPetIdRoute
+  '/appointments': typeof customerAppointmentsIndexRoute
   '/orders': typeof customerOrdersIndexRoute
+  '/pets': typeof customerPetsIndexRoute
+  '/adoption': typeof publicAdoptionIndexRoute
   '/products': typeof publicProductsIndexRoute
+  '/admin/adoption': typeof AdminAdoptionIndexRoute
   '/admin/orders': typeof AdminOrdersIndexRoute
   '/admin/products': typeof AdminProductsIndexRoute
+  '/vet/appointments': typeof VetAppointmentsIndexRoute
+  '/admin/adoption/$petId/edit': typeof AdminAdoptionPetIdEditRoute
   '/admin/products/$productId/edit': typeof AdminProductsProductIdEditRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/(customer)/appointments': typeof customerAppointmentsRouteRouteWithChildren
-  '/(customer)/pets': typeof customerPetsRouteRouteWithChildren
-  '/admin/users': typeof AdminUsersRouteRouteWithChildren
-  '/vet/appointments': typeof VetAppointmentsRouteRouteWithChildren
-  '/vet/patients': typeof VetPatientsRouteRouteWithChildren
   '/(customer)/cart': typeof customerCartRoute
   '/(customer)/checkout': typeof customerCheckoutRoute
-  '/(customer)/profile': typeof customerProfileRoute
-  '/(public)/search': typeof publicSearchRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/vet/dashboard': typeof VetDashboardRoute
-  '/vet/profile': typeof VetProfileRoute
   '/vet/schedule': typeof VetScheduleRoute
-  '/(customer)/appointments/$appointmentId': typeof customerAppointmentsAppointmentIdRoute
+  '/(customer)/appointments/new': typeof customerAppointmentsNewRoute
   '/(customer)/orders/$orderId': typeof customerOrdersOrderIdRoute
   '/(customer)/pets/$petId': typeof customerPetsPetIdRoute
+  '/(customer)/pets/new': typeof customerPetsNewRoute
+  '/(public)/adoption/$petId': typeof publicAdoptionPetIdRoute
   '/(public)/auth/login': typeof publicAuthLoginRoute
   '/(public)/auth/register': typeof publicAuthRegisterRoute
-  '/(public)/categories/$categoryId': typeof publicCategoriesCategoryIdRoute
   '/(public)/products/$productId': typeof publicProductsProductIdRoute
-  '/admin/orders/$orderId': typeof AdminOrdersOrderIdRoute
+  '/admin/adoption/applications': typeof AdminAdoptionApplicationsRoute
+  '/admin/adoption/new': typeof AdminAdoptionNewRoute
   '/admin/products/new': typeof AdminProductsNewRoute
-  '/admin/users/$userId': typeof AdminUsersUserIdRoute
   '/vet/appointments/$appointmentId': typeof VetAppointmentsAppointmentIdRoute
-  '/vet/patients/$petId': typeof VetPatientsPetIdRoute
+  '/(customer)/appointments/': typeof customerAppointmentsIndexRoute
   '/(customer)/orders/': typeof customerOrdersIndexRoute
+  '/(customer)/pets/': typeof customerPetsIndexRoute
+  '/(public)/adoption/': typeof publicAdoptionIndexRoute
   '/(public)/products/': typeof publicProductsIndexRoute
+  '/admin/adoption/': typeof AdminAdoptionIndexRoute
   '/admin/orders/': typeof AdminOrdersIndexRoute
   '/admin/products/': typeof AdminProductsIndexRoute
+  '/vet/appointments/': typeof VetAppointmentsIndexRoute
+  '/admin/adoption/$petId/edit': typeof AdminAdoptionPetIdEditRoute
   '/admin/products/$productId/edit': typeof AdminProductsProductIdEditRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/appointments'
-    | '/pets'
-    | '/admin/users'
-    | '/vet/appointments'
-    | '/vet/patients'
     | '/cart'
     | '/checkout'
-    | '/profile'
-    | '/search'
     | '/admin/dashboard'
     | '/vet/dashboard'
-    | '/vet/profile'
     | '/vet/schedule'
-    | '/appointments/$appointmentId'
+    | '/appointments/new'
     | '/orders/$orderId'
     | '/pets/$petId'
+    | '/pets/new'
+    | '/adoption/$petId'
     | '/auth/login'
     | '/auth/register'
-    | '/categories/$categoryId'
     | '/products/$productId'
-    | '/admin/orders/$orderId'
+    | '/admin/adoption/applications'
+    | '/admin/adoption/new'
     | '/admin/products/new'
-    | '/admin/users/$userId'
     | '/vet/appointments/$appointmentId'
-    | '/vet/patients/$petId'
+    | '/appointments'
     | '/orders'
+    | '/pets'
+    | '/adoption'
     | '/products'
+    | '/admin/adoption'
     | '/admin/orders'
     | '/admin/products'
+    | '/vet/appointments'
+    | '/admin/adoption/$petId/edit'
     | '/admin/products/$productId/edit'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/appointments'
-    | '/pets'
-    | '/admin/users'
-    | '/vet/appointments'
-    | '/vet/patients'
     | '/cart'
     | '/checkout'
-    | '/profile'
-    | '/search'
     | '/admin/dashboard'
     | '/vet/dashboard'
-    | '/vet/profile'
     | '/vet/schedule'
-    | '/appointments/$appointmentId'
+    | '/appointments/new'
     | '/orders/$orderId'
     | '/pets/$petId'
+    | '/pets/new'
+    | '/adoption/$petId'
     | '/auth/login'
     | '/auth/register'
-    | '/categories/$categoryId'
     | '/products/$productId'
-    | '/admin/orders/$orderId'
+    | '/admin/adoption/applications'
+    | '/admin/adoption/new'
     | '/admin/products/new'
-    | '/admin/users/$userId'
     | '/vet/appointments/$appointmentId'
-    | '/vet/patients/$petId'
+    | '/appointments'
     | '/orders'
+    | '/pets'
+    | '/adoption'
     | '/products'
+    | '/admin/adoption'
     | '/admin/orders'
     | '/admin/products'
+    | '/vet/appointments'
+    | '/admin/adoption/$petId/edit'
     | '/admin/products/$productId/edit'
   id:
     | '__root__'
     | '/'
-    | '/(customer)/appointments'
-    | '/(customer)/pets'
-    | '/admin/users'
-    | '/vet/appointments'
-    | '/vet/patients'
     | '/(customer)/cart'
     | '/(customer)/checkout'
-    | '/(customer)/profile'
-    | '/(public)/search'
     | '/admin/dashboard'
     | '/vet/dashboard'
-    | '/vet/profile'
     | '/vet/schedule'
-    | '/(customer)/appointments/$appointmentId'
+    | '/(customer)/appointments/new'
     | '/(customer)/orders/$orderId'
     | '/(customer)/pets/$petId'
+    | '/(customer)/pets/new'
+    | '/(public)/adoption/$petId'
     | '/(public)/auth/login'
     | '/(public)/auth/register'
-    | '/(public)/categories/$categoryId'
     | '/(public)/products/$productId'
-    | '/admin/orders/$orderId'
+    | '/admin/adoption/applications'
+    | '/admin/adoption/new'
     | '/admin/products/new'
-    | '/admin/users/$userId'
     | '/vet/appointments/$appointmentId'
-    | '/vet/patients/$petId'
+    | '/(customer)/appointments/'
     | '/(customer)/orders/'
+    | '/(customer)/pets/'
+    | '/(public)/adoption/'
     | '/(public)/products/'
+    | '/admin/adoption/'
     | '/admin/orders/'
     | '/admin/products/'
+    | '/vet/appointments/'
+    | '/admin/adoption/$petId/edit'
     | '/admin/products/$productId/edit'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  customerAppointmentsRouteRoute: typeof customerAppointmentsRouteRouteWithChildren
-  customerPetsRouteRoute: typeof customerPetsRouteRouteWithChildren
-  AdminUsersRouteRoute: typeof AdminUsersRouteRouteWithChildren
-  VetAppointmentsRouteRoute: typeof VetAppointmentsRouteRouteWithChildren
-  VetPatientsRouteRoute: typeof VetPatientsRouteRouteWithChildren
   customerCartRoute: typeof customerCartRoute
   customerCheckoutRoute: typeof customerCheckoutRoute
-  customerProfileRoute: typeof customerProfileRoute
-  publicSearchRoute: typeof publicSearchRoute
   AdminDashboardRoute: typeof AdminDashboardRoute
   VetDashboardRoute: typeof VetDashboardRoute
-  VetProfileRoute: typeof VetProfileRoute
   VetScheduleRoute: typeof VetScheduleRoute
+  customerAppointmentsNewRoute: typeof customerAppointmentsNewRoute
   customerOrdersOrderIdRoute: typeof customerOrdersOrderIdRoute
+  customerPetsPetIdRoute: typeof customerPetsPetIdRoute
+  customerPetsNewRoute: typeof customerPetsNewRoute
+  publicAdoptionPetIdRoute: typeof publicAdoptionPetIdRoute
   publicAuthLoginRoute: typeof publicAuthLoginRoute
   publicAuthRegisterRoute: typeof publicAuthRegisterRoute
-  publicCategoriesCategoryIdRoute: typeof publicCategoriesCategoryIdRoute
   publicProductsProductIdRoute: typeof publicProductsProductIdRoute
+  AdminAdoptionApplicationsRoute: typeof AdminAdoptionApplicationsRoute
+  AdminAdoptionNewRoute: typeof AdminAdoptionNewRoute
   AdminProductsNewRoute: typeof AdminProductsNewRoute
+  VetAppointmentsAppointmentIdRoute: typeof VetAppointmentsAppointmentIdRoute
+  customerAppointmentsIndexRoute: typeof customerAppointmentsIndexRoute
   customerOrdersIndexRoute: typeof customerOrdersIndexRoute
+  customerPetsIndexRoute: typeof customerPetsIndexRoute
+  publicAdoptionIndexRoute: typeof publicAdoptionIndexRoute
   publicProductsIndexRoute: typeof publicProductsIndexRoute
+  AdminAdoptionIndexRoute: typeof AdminAdoptionIndexRoute
   AdminOrdersIndexRoute: typeof AdminOrdersIndexRoute
   AdminProductsIndexRoute: typeof AdminProductsIndexRoute
+  VetAppointmentsIndexRoute: typeof VetAppointmentsIndexRoute
+  AdminAdoptionPetIdEditRoute: typeof AdminAdoptionPetIdEditRoute
   AdminProductsProductIdEditRoute: typeof AdminProductsProductIdEditRoute
 }
 
@@ -448,13 +427,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VetScheduleRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/vet/profile': {
-      id: '/vet/profile'
-      path: '/vet/profile'
-      fullPath: '/vet/profile'
-      preLoaderRoute: typeof VetProfileRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/vet/dashboard': {
       id: '/vet/dashboard'
       path: '/vet/dashboard'
@@ -467,20 +439,6 @@ declare module '@tanstack/react-router' {
       path: '/admin/dashboard'
       fullPath: '/admin/dashboard'
       preLoaderRoute: typeof AdminDashboardRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/(public)/search': {
-      id: '/(public)/search'
-      path: '/search'
-      fullPath: '/search'
-      preLoaderRoute: typeof publicSearchRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/(customer)/profile': {
-      id: '/(customer)/profile'
-      path: '/profile'
-      fullPath: '/profile'
-      preLoaderRoute: typeof customerProfileRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/(customer)/checkout': {
@@ -497,39 +455,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof customerCartRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/vet/patients': {
-      id: '/vet/patients'
-      path: '/vet/patients'
-      fullPath: '/vet/patients'
-      preLoaderRoute: typeof VetPatientsRouteRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/vet/appointments': {
-      id: '/vet/appointments'
+    '/vet/appointments/': {
+      id: '/vet/appointments/'
       path: '/vet/appointments'
       fullPath: '/vet/appointments'
-      preLoaderRoute: typeof VetAppointmentsRouteRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/admin/users': {
-      id: '/admin/users'
-      path: '/admin/users'
-      fullPath: '/admin/users'
-      preLoaderRoute: typeof AdminUsersRouteRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/(customer)/pets': {
-      id: '/(customer)/pets'
-      path: '/pets'
-      fullPath: '/pets'
-      preLoaderRoute: typeof customerPetsRouteRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/(customer)/appointments': {
-      id: '/(customer)/appointments'
-      path: '/appointments'
-      fullPath: '/appointments'
-      preLoaderRoute: typeof customerAppointmentsRouteRouteImport
+      preLoaderRoute: typeof VetAppointmentsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/products/': {
@@ -546,11 +476,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminOrdersIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/adoption/': {
+      id: '/admin/adoption/'
+      path: '/admin/adoption'
+      fullPath: '/admin/adoption'
+      preLoaderRoute: typeof AdminAdoptionIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/(public)/products/': {
       id: '/(public)/products/'
       path: '/products'
       fullPath: '/products'
       preLoaderRoute: typeof publicProductsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(public)/adoption/': {
+      id: '/(public)/adoption/'
+      path: '/adoption'
+      fullPath: '/adoption'
+      preLoaderRoute: typeof publicAdoptionIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(customer)/pets/': {
+      id: '/(customer)/pets/'
+      path: '/pets'
+      fullPath: '/pets'
+      preLoaderRoute: typeof customerPetsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/(customer)/orders/': {
@@ -560,26 +511,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof customerOrdersIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/vet/patients/$petId': {
-      id: '/vet/patients/$petId'
-      path: '/$petId'
-      fullPath: '/vet/patients/$petId'
-      preLoaderRoute: typeof VetPatientsPetIdRouteImport
-      parentRoute: typeof VetPatientsRouteRoute
+    '/(customer)/appointments/': {
+      id: '/(customer)/appointments/'
+      path: '/appointments'
+      fullPath: '/appointments'
+      preLoaderRoute: typeof customerAppointmentsIndexRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/vet/appointments/$appointmentId': {
       id: '/vet/appointments/$appointmentId'
-      path: '/$appointmentId'
+      path: '/vet/appointments/$appointmentId'
       fullPath: '/vet/appointments/$appointmentId'
       preLoaderRoute: typeof VetAppointmentsAppointmentIdRouteImport
-      parentRoute: typeof VetAppointmentsRouteRoute
-    }
-    '/admin/users/$userId': {
-      id: '/admin/users/$userId'
-      path: '/$userId'
-      fullPath: '/admin/users/$userId'
-      preLoaderRoute: typeof AdminUsersUserIdRouteImport
-      parentRoute: typeof AdminUsersRouteRoute
+      parentRoute: typeof rootRouteImport
     }
     '/admin/products/new': {
       id: '/admin/products/new'
@@ -588,25 +532,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminProductsNewRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/admin/orders/$orderId': {
-      id: '/admin/orders/$orderId'
-      path: '/$orderId'
-      fullPath: '/admin/orders/$orderId'
-      preLoaderRoute: typeof AdminOrdersOrderIdRouteImport
-      parentRoute: typeof AdminOrdersRouteRoute
+    '/admin/adoption/new': {
+      id: '/admin/adoption/new'
+      path: '/admin/adoption/new'
+      fullPath: '/admin/adoption/new'
+      preLoaderRoute: typeof AdminAdoptionNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/adoption/applications': {
+      id: '/admin/adoption/applications'
+      path: '/admin/adoption/applications'
+      fullPath: '/admin/adoption/applications'
+      preLoaderRoute: typeof AdminAdoptionApplicationsRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/(public)/products/$productId': {
       id: '/(public)/products/$productId'
       path: '/products/$productId'
       fullPath: '/products/$productId'
       preLoaderRoute: typeof publicProductsProductIdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/(public)/categories/$categoryId': {
-      id: '/(public)/categories/$categoryId'
-      path: '/categories/$categoryId'
-      fullPath: '/categories/$categoryId'
-      preLoaderRoute: typeof publicCategoriesCategoryIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/(public)/auth/register': {
@@ -623,12 +567,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof publicAuthLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/(public)/adoption/$petId': {
+      id: '/(public)/adoption/$petId'
+      path: '/adoption/$petId'
+      fullPath: '/adoption/$petId'
+      preLoaderRoute: typeof publicAdoptionPetIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(customer)/pets/new': {
+      id: '/(customer)/pets/new'
+      path: '/pets/new'
+      fullPath: '/pets/new'
+      preLoaderRoute: typeof customerPetsNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/(customer)/pets/$petId': {
       id: '/(customer)/pets/$petId'
-      path: '/$petId'
+      path: '/pets/$petId'
       fullPath: '/pets/$petId'
       preLoaderRoute: typeof customerPetsPetIdRouteImport
-      parentRoute: typeof customerPetsRouteRoute
+      parentRoute: typeof rootRouteImport
     }
     '/(customer)/orders/$orderId': {
       id: '/(customer)/orders/$orderId'
@@ -637,12 +595,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof customerOrdersOrderIdRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/(customer)/appointments/$appointmentId': {
-      id: '/(customer)/appointments/$appointmentId'
-      path: '/$appointmentId'
-      fullPath: '/appointments/$appointmentId'
-      preLoaderRoute: typeof customerAppointmentsAppointmentIdRouteImport
-      parentRoute: typeof customerAppointmentsRouteRoute
+    '/(customer)/appointments/new': {
+      id: '/(customer)/appointments/new'
+      path: '/appointments/new'
+      fullPath: '/appointments/new'
+      preLoaderRoute: typeof customerAppointmentsNewRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/admin/products/$productId/edit': {
       id: '/admin/products/$productId/edit'
@@ -651,94 +609,45 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminProductsProductIdEditRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/adoption/$petId/edit': {
+      id: '/admin/adoption/$petId/edit'
+      path: '/admin/adoption/$petId/edit'
+      fullPath: '/admin/adoption/$petId/edit'
+      preLoaderRoute: typeof AdminAdoptionPetIdEditRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
-
-interface customerAppointmentsRouteRouteChildren {
-  customerAppointmentsAppointmentIdRoute: typeof customerAppointmentsAppointmentIdRoute
-}
-
-const customerAppointmentsRouteRouteChildren: customerAppointmentsRouteRouteChildren =
-  {
-    customerAppointmentsAppointmentIdRoute:
-      customerAppointmentsAppointmentIdRoute,
-  }
-
-const customerAppointmentsRouteRouteWithChildren =
-  customerAppointmentsRouteRoute._addFileChildren(
-    customerAppointmentsRouteRouteChildren,
-  )
-
-interface customerPetsRouteRouteChildren {
-  customerPetsPetIdRoute: typeof customerPetsPetIdRoute
-}
-
-const customerPetsRouteRouteChildren: customerPetsRouteRouteChildren = {
-  customerPetsPetIdRoute: customerPetsPetIdRoute,
-}
-
-const customerPetsRouteRouteWithChildren =
-  customerPetsRouteRoute._addFileChildren(customerPetsRouteRouteChildren)
-
-interface AdminUsersRouteRouteChildren {
-  AdminUsersUserIdRoute: typeof AdminUsersUserIdRoute
-}
-
-const AdminUsersRouteRouteChildren: AdminUsersRouteRouteChildren = {
-  AdminUsersUserIdRoute: AdminUsersUserIdRoute,
-}
-
-const AdminUsersRouteRouteWithChildren = AdminUsersRouteRoute._addFileChildren(
-  AdminUsersRouteRouteChildren,
-)
-
-interface VetAppointmentsRouteRouteChildren {
-  VetAppointmentsAppointmentIdRoute: typeof VetAppointmentsAppointmentIdRoute
-}
-
-const VetAppointmentsRouteRouteChildren: VetAppointmentsRouteRouteChildren = {
-  VetAppointmentsAppointmentIdRoute: VetAppointmentsAppointmentIdRoute,
-}
-
-const VetAppointmentsRouteRouteWithChildren =
-  VetAppointmentsRouteRoute._addFileChildren(VetAppointmentsRouteRouteChildren)
-
-interface VetPatientsRouteRouteChildren {
-  VetPatientsPetIdRoute: typeof VetPatientsPetIdRoute
-}
-
-const VetPatientsRouteRouteChildren: VetPatientsRouteRouteChildren = {
-  VetPatientsPetIdRoute: VetPatientsPetIdRoute,
-}
-
-const VetPatientsRouteRouteWithChildren =
-  VetPatientsRouteRoute._addFileChildren(VetPatientsRouteRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  customerAppointmentsRouteRoute: customerAppointmentsRouteRouteWithChildren,
-  customerPetsRouteRoute: customerPetsRouteRouteWithChildren,
-  AdminUsersRouteRoute: AdminUsersRouteRouteWithChildren,
-  VetAppointmentsRouteRoute: VetAppointmentsRouteRouteWithChildren,
-  VetPatientsRouteRoute: VetPatientsRouteRouteWithChildren,
   customerCartRoute: customerCartRoute,
   customerCheckoutRoute: customerCheckoutRoute,
-  customerProfileRoute: customerProfileRoute,
-  publicSearchRoute: publicSearchRoute,
   AdminDashboardRoute: AdminDashboardRoute,
   VetDashboardRoute: VetDashboardRoute,
-  VetProfileRoute: VetProfileRoute,
   VetScheduleRoute: VetScheduleRoute,
+  customerAppointmentsNewRoute: customerAppointmentsNewRoute,
   customerOrdersOrderIdRoute: customerOrdersOrderIdRoute,
+  customerPetsPetIdRoute: customerPetsPetIdRoute,
+  customerPetsNewRoute: customerPetsNewRoute,
+  publicAdoptionPetIdRoute: publicAdoptionPetIdRoute,
   publicAuthLoginRoute: publicAuthLoginRoute,
   publicAuthRegisterRoute: publicAuthRegisterRoute,
-  publicCategoriesCategoryIdRoute: publicCategoriesCategoryIdRoute,
   publicProductsProductIdRoute: publicProductsProductIdRoute,
+  AdminAdoptionApplicationsRoute: AdminAdoptionApplicationsRoute,
+  AdminAdoptionNewRoute: AdminAdoptionNewRoute,
   AdminProductsNewRoute: AdminProductsNewRoute,
+  VetAppointmentsAppointmentIdRoute: VetAppointmentsAppointmentIdRoute,
+  customerAppointmentsIndexRoute: customerAppointmentsIndexRoute,
   customerOrdersIndexRoute: customerOrdersIndexRoute,
+  customerPetsIndexRoute: customerPetsIndexRoute,
+  publicAdoptionIndexRoute: publicAdoptionIndexRoute,
   publicProductsIndexRoute: publicProductsIndexRoute,
+  AdminAdoptionIndexRoute: AdminAdoptionIndexRoute,
   AdminOrdersIndexRoute: AdminOrdersIndexRoute,
   AdminProductsIndexRoute: AdminProductsIndexRoute,
+  VetAppointmentsIndexRoute: VetAppointmentsIndexRoute,
+  AdminAdoptionPetIdEditRoute: AdminAdoptionPetIdEditRoute,
   AdminProductsProductIdEditRoute: AdminProductsProductIdEditRoute,
 }
 export const routeTree = rootRouteImport

@@ -22,71 +22,72 @@ export interface Cart {
 
 // API functions
 const fetchCart = async (): Promise<Cart> => {
-	//   const response = await fetch('/api/cart')
-	//   if (!response.ok) throw new Error('Failed to fetch cart')
-	return new Promise((resolve) => {
-		resolve({
-			id: "cart123",
-			items: [
-				{
-					id: "1",
-					product: {
-						id: "pf001",
-						name: "Premium Dog Food",
-						description:
-							"Nutritious dry dog food with real chicken and vegetables for a balanced diet.",
-						price: 45.99,
-						originalPrice: 55.99,
-						discount: 10,
-						images: [
-							"https://images-na.ssl-images-amazon.com/images/I/81P2kN9x-BL._AC_SL1500_.jpg",
-						],
-						category: {
-							id: "cat001",
-							name: "Pet Food",
-						},
-						inStock: true,
-						stockCount: 50,
-						createdAt: "2024-06-01T10:00:00.000Z",
-						updatedAt: "2024-10-01T09:30:00.000Z",
-					},
-					quantity: 2,
-					addedAt: new Date().toISOString(),
-				},
-				{
-					id: "1",
-					product: {
-						id: "pf002",
-						name: "Organic Catnip Toy",
-						description:
-							"Natural catnip-filled toy to keep your cat entertained and happy.",
-						price: 9.99,
-						originalPrice: 12.99,
-						discount: 3,
-						images: [
-							"https://www.multipet.com/media/CatnipGarden_Natural_.5-ounce-website.png",
-						],
-						category: {
-							id: "cat002",
-							name: "Pet Toys",
-						},
-						inStock: true,
-						stockCount: 100,
-						createdAt: "2024-07-15T08:00:00.000Z",
-						updatedAt: "2024-10-01T09:30:00.000Z",
-					},
-					quantity: 3,
-					addedAt: new Date().toISOString(),
-				},
-			],
-			totalItems: 2,
-			subtotal: 91.98,
-			tax: 7.36,
-			shipping: 5.0,
-			total: 104.34,
-			updatedAt: new Date().toISOString(),
-		});
-	});
+	const response = await fetch("/api/cart");
+	if (!response.ok) throw new Error("Failed to fetch cart");
+	return response.json();
+	// return new Promise((resolve) => {
+	// 	resolve({
+	// 		id: "cart123",
+	// 		items: [
+	// 			{
+	// 				id: "1",
+	// 				product: {
+	// 					id: "pf001",
+	// 					name: "Premium Dog Food",
+	// 					description:
+	// 						"Nutritious dry dog food with real chicken and vegetables for a balanced diet.",
+	// 					price: 45.99,
+	// 					originalPrice: 55.99,
+	// 					discount: 10,
+	// 					images: [
+	// 						"https://images-na.ssl-images-amazon.com/images/I/81P2kN9x-BL._AC_SL1500_.jpg",
+	// 					],
+	// 					category: {
+	// 						id: "cat001",
+	// 						name: "Pet Food",
+	// 					},
+	// 					inStock: true,
+	// 					stockCount: 50,
+	// 					createdAt: "2024-06-01T10:00:00.000Z",
+	// 					updatedAt: "2024-10-01T09:30:00.000Z",
+	// 				},
+	// 				quantity: 2,
+	// 				addedAt: new Date().toISOString(),
+	// 			},
+	// 			{
+	// 				id: "1",
+	// 				product: {
+	// 					id: "pf002",
+	// 					name: "Organic Catnip Toy",
+	// 					description:
+	// 						"Natural catnip-filled toy to keep your cat entertained and happy.",
+	// 					price: 9.99,
+	// 					originalPrice: 12.99,
+	// 					discount: 3,
+	// 					images: [
+	// 						"https://www.multipet.com/media/CatnipGarden_Natural_.5-ounce-website.png",
+	// 					],
+	// 					category: {
+	// 						id: "cat002",
+	// 						name: "Pet Toys",
+	// 					},
+	// 					inStock: true,
+	// 					stockCount: 100,
+	// 					createdAt: "2024-07-15T08:00:00.000Z",
+	// 					updatedAt: "2024-10-01T09:30:00.000Z",
+	// 				},
+	// 				quantity: 3,
+	// 				addedAt: new Date().toISOString(),
+	// 			},
+	// 		],
+	// 		totalItems: 2,
+	// 		subtotal: 91.98,
+	// 		tax: 7.36,
+	// 		shipping: 5.0,
+	// 		total: 104.34,
+	// 		updatedAt: new Date().toISOString(),
+	// 	});
+	// });
 };
 
 const updateCartItem = async ({
@@ -130,13 +131,11 @@ const addToCart = async ({
 };
 
 const clearCart = async () => {
-	//   const response = await fetch('/api/cart', {
-	//     method: 'DELETE'
-	//   })
-	//   if (!response.ok) throw new Error('Failed to clear cart')
-	return new Promise((resolve) => {
-		resolve({});
+	const response = await fetch("/api/cart", {
+		method: "DELETE",
 	});
+	if (!response.ok) throw new Error("Failed to clear cart");
+	return response.json();
 };
 
 // Helper function to recalculate cart totals

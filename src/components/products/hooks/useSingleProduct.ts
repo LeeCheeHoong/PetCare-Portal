@@ -22,39 +22,42 @@ export interface ProductDetail {
 
 // API function for single product
 const fetchProduct = async (productId: string): Promise<ProductDetail> => {
-	// const response = await fetch(`/api/products/${productId}`)
+	const response = await fetch(`/api/products/${productId}`);
 
-	// if (!response.ok) {
-	//   if (response.status === 404) {
-	//     throw new Error('Product not found')
-	//   }
-	//   throw new Error(`Failed to fetch product: ${response.statusText}`)
-	// }
+	if (!response.ok) {
+		if (response.status === 404) {
+			throw new Error("Product not found");
+		}
+		throw new Error(`Failed to fetch product: ${response.statusText}`);
+	}
 
-	return new Promise((resolve) => {
-		resolve({
-			id: "pf002",
-			name: "Organic Catnip Toy",
-			description:
-				"Natural catnip-filled toy to keep your cat entertained and happy.",
-			detailedDescription:
-				"Natural catnip-filled toy to keep your cat entertained and happy.",
-			price: 9.99,
-			originalPrice: 12.99,
-			discount: 3,
-			images: [
-				"https://www.multipet.com/media/CatnipGarden_Natural_.5-ounce-website.png",
-			],
-			category: {
-				id: "cat002",
-				name: "Pet Toys",
-			},
-			inStock: true,
-			stockCount: 100,
-			createdAt: "2024-07-15T08:00:00.000Z",
-			updatedAt: "2024-10-01T09:30:00.000Z",
-		});
-	});
+	return response.json();
+
+	// return new Promise((resolve) => {
+	// 	resolve({
+	// 		id: "pf002",
+	// 		name: "Organic Catnip Toy",
+	// 		description:
+	// 			"Natural catnip-filled toy to keep your cat entertained and happy.",
+	// 		detailedDescription:
+	// 			"Natural catnip-filled toy to keep your cat entertained and happy.",
+	// 		price: 9.99,
+	// 		originalPrice: 12.99,
+	// 		discount: 3,
+	// 		images: [
+	// 			"https://www.multipet.com/media/CatnipGarden_Natural_.5-ounce-website.png",
+	// 			"https://i.ebayimg.com/images/g/oyUAAOSwuuFkut0~/s-l1600.webp",
+	// 		],
+	// 		category: {
+	// 			id: "cat002",
+	// 			name: "Pet Toys",
+	// 		},
+	// 		inStock: true,
+	// 		stockCount: 100,
+	// 		createdAt: "2024-07-15T08:00:00.000Z",
+	// 		updatedAt: "2024-10-01T09:30:00.000Z",
+	// 	});
+	// });
 };
 
 // Main hook for single product
@@ -66,7 +69,7 @@ export const useProduct = (
 		queryKey: ["product", productId],
 		queryFn: () => fetchProduct(productId),
 		enabled: !!productId, // Only run if productId exists
-		staleTime: 10 * 60 * 1000, // 10 minutes - product details don't change often
+		staleTime: 10 * 60 * 1000,
 		gcTime: 15 * 60 * 1000, // 15 minutes cache time
 		retry: (failureCount, error) => {
 			// Don't retry if product not found
@@ -97,39 +100,39 @@ const fetchRelatedProducts = async ({
 		exclude: excludeProductId,
 	});
 
-	// const response = await fetch(`/api/products?${params.toString()}`)
+	const response = await fetch(`/api/products?${params.toString()}`);
 
-	// if (!response.ok) {
-	//   throw new Error(`Failed to fetch related products: ${response.statusText}`)
-	// }
+	if (!response.ok) {
+		throw new Error(`Failed to fetch related products: ${response.statusText}`);
+	}
 
-	// const data = await response.json()
-	return new Promise((resolve) => {
-		resolve([
-			{
-				id: "pf001",
-				name: "Premium Dog Food",
-				description:
-					"Nutritious dry dog food with real chicken and vegetables for a balanced diet.",
-				detailedDescription:
-					"Nutritious dry dog food with real chicken and vegetables for a balanced diet.",
-				price: 45.99,
-				originalPrice: 55.99,
-				discount: 10,
-				images: [
-					"https://images-na.ssl-images-amazon.com/images/I/81P2kN9x-BL._AC_SL1500_.jpg",
-				],
-				category: {
-					id: "cat001",
-					name: "Pet Food",
-				},
-				inStock: true,
-				stockCount: 50,
-				createdAt: "2024-06-01T10:00:00.000Z",
-				updatedAt: "2024-10-01T09:30:00.000Z",
-			},
-		]);
-	});
+	return response.json();
+	// return new Promise((resolve) => {
+	// 	resolve([
+	// 		{
+	// 			id: "pf001",
+	// 			name: "Premium Dog Food",
+	// 			description:
+	// 				"Nutritious dry dog food with real chicken and vegetables for a balanced diet.",
+	// 			detailedDescription:
+	// 				"Nutritious dry dog food with real chicken and vegetables for a balanced diet.",
+	// 			price: 45.99,
+	// 			originalPrice: 55.99,
+	// 			discount: 10,
+	// 			images: [
+	// 				"https://images-na.ssl-images-amazon.com/images/I/81P2kN9x-BL._AC_SL1500_.jpg",
+	// 			],
+	// 			category: {
+	// 				id: "cat001",
+	// 				name: "Pet Food",
+	// 			},
+	// 			inStock: true,
+	// 			stockCount: 50,
+	// 			createdAt: "2024-06-01T10:00:00.000Z",
+	// 			updatedAt: "2024-10-01T09:30:00.000Z",
+	// 		},
+	// 	]);
+	// });
 };
 
 export const useRelatedProducts = (

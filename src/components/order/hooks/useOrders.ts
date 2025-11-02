@@ -97,207 +97,209 @@ const fetchOrders = async ({
 	page?: number;
 	limit?: number;
 }): Promise<OrdersResponse> => {
-	// const response = await fetch(`/api/orders?page=${page}&limit=${limit}`)
-	// if (!response.ok) throw new Error('Failed to fetch orders')
-	return new Promise((resolve) =>
-		resolve({
-			success: true,
-			orders: [
-				{
-					id: "order_abc123def456",
-					orderNumber: "ORD-2024-001234",
-					status: "shipped",
-					statusHistory: [
-						{
-							status: "confirmed",
-							timestamp: "2024-01-22T11:30:00Z",
-							note: "Order confirmed and payment processed",
-						},
-						{
-							status: "processing",
-							timestamp: "2024-01-22T14:15:00Z",
-							note: "Order is being prepared for shipment",
-						},
-						{
-							status: "shipped",
-							timestamp: "2024-01-23T09:45:00Z",
-							note: "Order has been shipped",
-						},
-					],
-					totalAmount: 663.96,
-					currency: "USD",
-					items: [
-						{
-							id: "order_item_1",
-							productId: "pf001",
-							productName: "Premium Dog Food",
-							productImage:
-								"https://images-na.ssl-images-amazon.com/images/I/81P2kN9x-BL._AC_SL1500_.jpg",
-							quantity: 2,
-							unitPrice: 45.99,
-							totalPrice: 91.98,
-						},
-						{
-							id: "order_item_2",
-							productId: "pf002",
-							productName: "Organic Catnip Toy",
-							productImage:
-								"https://www.multipet.com/media/CatnipGarden_Natural_.5-ounce-website.png",
-							quantity: 3,
-							unitPrice: 9.99,
-							totalPrice: 29.97,
-						},
-					],
-					shippingAddress: {
-						firstName: "John",
-						lastName: "Doe",
-						email: "john@example.com",
-						phone: "+1-555-123-4567",
-						address: "123 Main Street",
-						city: "New York",
-						state: "NY",
-						zipCode: "10001",
-						country: "US",
-					},
-					billingAddress: {
-						firstName: "John",
-						lastName: "Doe",
-						address: "123 Main Street",
-						city: "New York",
-						state: "NY",
-						zipCode: "10001",
-						country: "US",
-					},
-					paymentMethod: {
-						type: "card",
-						last4: "4242",
-						brand: "visa",
-					},
-					pricing: {
-						subtotal: 599.98,
-						shipping: 15.99,
-						tax: 47.99,
-						discount: 0,
-						total: 663.96,
-					},
-					shipping: {
-						method: "standard",
-						carrier: "UPS",
-						trackingNumber: "TRK987654321",
-						trackingUrl: "https://ups.com/track?number=TRK987654321",
-						estimatedDelivery: "2024-01-25T17:00:00Z",
-					},
-					orderDate: "2024-01-22T11:30:00Z",
-					updatedAt: "2024-01-23T09:45:00Z",
-				},
-			],
-			pagination: {
-				page: 1,
-				limit: 10,
-				total: 0,
-				totalPages: 0,
-			},
-		}),
-	);
+	const response = await fetch(`/api/orders?page=${page}&limit=${limit}`);
+	if (!response.ok) throw new Error("Failed to fetch orders");
+	return response.json();
+	// return new Promise((resolve) =>
+	// 	resolve({
+	// 		success: true,
+	// 		orders: [
+	// 			{
+	// 				id: "order_abc123def456",
+	// 				orderNumber: "ORD-2024-001234",
+	// 				status: "shipped",
+	// 				statusHistory: [
+	// 					{
+	// 						status: "confirmed",
+	// 						timestamp: "2024-01-22T11:30:00Z",
+	// 						note: "Order confirmed and payment processed",
+	// 					},
+	// 					{
+	// 						status: "processing",
+	// 						timestamp: "2024-01-22T14:15:00Z",
+	// 						note: "Order is being prepared for shipment",
+	// 					},
+	// 					{
+	// 						status: "shipped",
+	// 						timestamp: "2024-01-23T09:45:00Z",
+	// 						note: "Order has been shipped",
+	// 					},
+	// 				],
+	// 				totalAmount: 663.96,
+	// 				currency: "USD",
+	// 				items: [
+	// 					{
+	// 						id: "order_item_1",
+	// 						productId: "pf001",
+	// 						productName: "Premium Dog Food",
+	// 						productImage:
+	// 							"https://images-na.ssl-images-amazon.com/images/I/81P2kN9x-BL._AC_SL1500_.jpg",
+	// 						quantity: 2,
+	// 						unitPrice: 45.99,
+	// 						totalPrice: 91.98,
+	// 					},
+	// 					{
+	// 						id: "order_item_2",
+	// 						productId: "pf002",
+	// 						productName: "Organic Catnip Toy",
+	// 						productImage:
+	// 							"https://www.multipet.com/media/CatnipGarden_Natural_.5-ounce-website.png",
+	// 						quantity: 3,
+	// 						unitPrice: 9.99,
+	// 						totalPrice: 29.97,
+	// 					},
+	// 				],
+	// 				shippingAddress: {
+	// 					firstName: "John",
+	// 					lastName: "Doe",
+	// 					email: "john@example.com",
+	// 					phone: "+1-555-123-4567",
+	// 					address: "123 Main Street",
+	// 					city: "New York",
+	// 					state: "NY",
+	// 					zipCode: "10001",
+	// 					country: "US",
+	// 				},
+	// 				billingAddress: {
+	// 					firstName: "John",
+	// 					lastName: "Doe",
+	// 					address: "123 Main Street",
+	// 					city: "New York",
+	// 					state: "NY",
+	// 					zipCode: "10001",
+	// 					country: "US",
+	// 				},
+	// 				paymentMethod: {
+	// 					type: "card",
+	// 					last4: "4242",
+	// 					brand: "visa",
+	// 				},
+	// 				pricing: {
+	// 					subtotal: 599.98,
+	// 					shipping: 15.99,
+	// 					tax: 47.99,
+	// 					discount: 0,
+	// 					total: 663.96,
+	// 				},
+	// 				shipping: {
+	// 					method: "standard",
+	// 					carrier: "UPS",
+	// 					trackingNumber: "TRK987654321",
+	// 					trackingUrl: "https://ups.com/track?number=TRK987654321",
+	// 					estimatedDelivery: "2024-01-25T17:00:00Z",
+	// 				},
+	// 				orderDate: "2024-01-22T11:30:00Z",
+	// 				updatedAt: "2024-01-23T09:45:00Z",
+	// 			},
+	// 		],
+	// 		pagination: {
+	// 			page: 1,
+	// 			limit: 10,
+	// 			total: 0,
+	// 			totalPages: 0,
+	// 		},
+	// 	}),
+	// );
 };
 
 const fetchOrderDetails = async (orderId: string): Promise<OrderDetails> => {
-	// const response = await fetch(`/api/orders/${orderId}`)
-	// if (!response.ok) {
-	//   if (response.status === 404) {
-	//     throw new Error('Order not found')
-	//   }
-	//   throw new Error('Failed to fetch order details')
-	// }
-	return new Promise((resolve) =>
-		resolve({
-			id: "order_abc123def456",
-			orderNumber: "ORD-2024-001234",
-			status: "shipped",
-			statusHistory: [
-				{
-					status: "confirmed",
-					timestamp: "2024-01-22T11:30:00Z",
-					note: "Order confirmed and payment processed",
-				},
-				{
-					status: "processing",
-					timestamp: "2024-01-22T14:15:00Z",
-					note: "Order is being prepared for shipment",
-				},
-				{
-					status: "shipped",
-					timestamp: "2024-01-23T09:45:00Z",
-					note: "Order has been shipped",
-				},
-			],
-			totalAmount: 663.96,
-			currency: "USD",
-			items: [
-				{
-					id: "order_item_1",
-					productId: "pf001",
-					productName: "Premium Dog Food",
-					productImage:
-						"https://images-na.ssl-images-amazon.com/images/I/81P2kN9x-BL._AC_SL1500_.jpg",
-					quantity: 2,
-					unitPrice: 45.99,
-					totalPrice: 91.98,
-				},
-				{
-					id: "order_item_2",
-					productId: "pf002",
-					productName: "Organic Catnip Toy",
-					productImage:
-						"https://www.multipet.com/media/CatnipGarden_Natural_.5-ounce-website.png",
-					quantity: 3,
-					unitPrice: 9.99,
-					totalPrice: 29.97,
-				},
-			],
-			shippingAddress: {
-				firstName: "Some",
-				lastName: "Guy",
-				email: "example@example.com",
-				phone: "6012345678",
-				address: "Address",
-				city: "Georgetown",
-				state: "Penang",
-				zipCode: "11900",
-				country: "Malaysia",
-			},
-			billingAddress: {
-				firstName: "Some",
-				lastName: "Guy",
-				address: "Address",
-				city: "Georgetown",
-				state: "Penang",
-				zipCode: "11900",
-				country: "Malaysia",
-			},
-			paymentMethod: {
-				type: "card",
-				last4: "4242",
-				brand: "visa",
-			},
-			pricing: {
-				subtotal: 599.98,
-				shipping: 15.99,
-				tax: 47.99,
-				discount: 0,
-				total: 663.96,
-			},
-			shipping: {
-				method: "standard",
-				carrier: "PosLaju",
-				trackingNumber: "TRK987654321",
-				trackingUrl: "https://ups.com/track?number=TRK987654321",
-				estimatedDelivery: "2024-01-25T17:00:00Z",
-			},
-			orderDate: "2024-01-22T11:30:00Z",
-			updatedAt: "2024-01-23T09:45:00Z",
-		}),
-	);
+	const response = await fetch(`/api/orders/${orderId}`);
+	if (!response.ok) {
+		if (response.status === 404) {
+			throw new Error("Order not found");
+		}
+		throw new Error("Failed to fetch order details");
+	}
+	return response.json();
+	// return new Promise((resolve) =>
+	// 	resolve({
+	// 		id: "order_abc123def456",
+	// 		orderNumber: "ORD-2024-001234",
+	// 		status: "confirmed",
+	// 		statusHistory: [
+	// 			{
+	// 				status: "confirmed",
+	// 				timestamp: "2024-01-22T11:30:00Z",
+	// 				note: "Order confirmed and payment processed",
+	// 			},
+	// 			{
+	// 				status: "processing",
+	// 				timestamp: "2024-01-22T14:15:00Z",
+	// 				note: "Order is being prepared for shipment",
+	// 			},
+	// 			{
+	// 				status: "shipped",
+	// 				timestamp: "2024-01-23T09:45:00Z",
+	// 				note: "Order has been shipped",
+	// 			},
+	// 		],
+	// 		totalAmount: 663.96,
+	// 		currency: "USD",
+	// 		items: [
+	// 			{
+	// 				id: "order_item_1",
+	// 				productId: "pf001",
+	// 				productName: "Premium Dog Food",
+	// 				productImage:
+	// 					"https://images-na.ssl-images-amazon.com/images/I/81P2kN9x-BL._AC_SL1500_.jpg",
+	// 				quantity: 2,
+	// 				unitPrice: 45.99,
+	// 				totalPrice: 91.98,
+	// 			},
+	// 			{
+	// 				id: "order_item_2",
+	// 				productId: "pf002",
+	// 				productName: "Organic Catnip Toy",
+	// 				productImage:
+	// 					"https://www.multipet.com/media/CatnipGarden_Natural_.5-ounce-website.png",
+	// 				quantity: 3,
+	// 				unitPrice: 9.99,
+	// 				totalPrice: 29.97,
+	// 			},
+	// 		],
+	// 		shippingAddress: {
+	// 			firstName: "Some",
+	// 			lastName: "Guy",
+	// 			email: "example@example.com",
+	// 			phone: "6012345678",
+	// 			address: "Address",
+	// 			city: "Georgetown",
+	// 			state: "Penang",
+	// 			zipCode: "11900",
+	// 			country: "Malaysia",
+	// 		},
+	// 		billingAddress: {
+	// 			firstName: "Some",
+	// 			lastName: "Guy",
+	// 			address: "Address",
+	// 			city: "Georgetown",
+	// 			state: "Penang",
+	// 			zipCode: "11900",
+	// 			country: "Malaysia",
+	// 		},
+	// 		paymentMethod: {
+	// 			type: "card",
+	// 			last4: "4242",
+	// 			brand: "visa",
+	// 		},
+	// 		pricing: {
+	// 			subtotal: 599.98,
+	// 			shipping: 15.99,
+	// 			tax: 47.99,
+	// 			discount: 0,
+	// 			total: 663.96,
+	// 		},
+	// 		shipping: {
+	// 			method: "standard",
+	// 			carrier: "PosLaju",
+	// 			trackingNumber: "TRK987654321",
+	// 			trackingUrl: "https://ups.com/track?number=TRK987654321",
+	// 			estimatedDelivery: "2024-01-25T17:00:00Z",
+	// 		},
+	// 		orderDate: "2024-01-22T11:30:00Z",
+	// 		updatedAt: "2024-01-23T09:45:00Z",
+	// 	}),
+	// );
 };
 
 const cancelOrder = async (orderId: string) => {

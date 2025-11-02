@@ -26,18 +26,18 @@ export function useProductForm(productId?: string) {
 	const { data: categories, isLoading: isLoadingCategories } = useQuery({
 		queryKey: ["categories"],
 		queryFn: async () => {
-			// const response = await fetch("/api/categories");
-			// if (!response.ok) throw new Error("Failed to fetch categories");
-			// return response.json() as Promise<Category[]>;
+			const response = await fetch("/api/categories");
+			if (!response.ok) throw new Error("Failed to fetch categories");
+			return response.json() as Promise<Category[]>;
 
-			return new Promise<Category[]>((resolve) =>
-				resolve([
-					{
-						id: "a",
-						name: "a",
-					},
-				]),
-			);
+			// return new Promise<Category[]>((resolve) =>
+			// 	resolve([
+			// 		{
+			// 			id: "a",
+			// 			name: "a",
+			// 		},
+			// 	]),
+			// );
 		},
 	});
 
@@ -46,20 +46,19 @@ export function useProductForm(productId?: string) {
 	// Create product mutation
 	const createProduct = useMutation({
 		mutationFn: async (data: CreateProductInput) => {
-			// const response = await fetch("/api/products", {
-			// 	method: "POST",
-			// 	headers: {
-			// 		"Content-Type": "application/json",
-			// 	},
-			// 	body: JSON.stringify(data),
-			// });
+			const response = await fetch("/api/products", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(data),
+			});
 
-			// if (!response.ok) {
-			// 	throw new Error("Failed to create product");
-			// }
+			if (!response.ok) {
+				throw new Error("Failed to create product");
+			}
 
-			// return response.json();
-			return new Promise((resolve) => resolve({}));
+			return response.json();
 		},
 		onSuccess: () => {
 			// Invalidate products list to refresh

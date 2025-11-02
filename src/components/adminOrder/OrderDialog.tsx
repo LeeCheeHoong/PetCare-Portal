@@ -1,11 +1,3 @@
-import {
-	AlertDialog,
-	AlertDialogAction,
-	AlertDialogCancel,
-	AlertDialogContent,
-	AlertDialogDescription,
-	AlertDialogTitle,
-} from "@radix-ui/react-alert-dialog";
 import { format } from "date-fns";
 import { CheckCircle, MapPin, Package, Truck, XCircle } from "lucide-react";
 import { useState } from "react";
@@ -19,7 +11,16 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import type { OrderDetails } from "../order/hooks/useOrders";
-import { AlertDialogFooter, AlertDialogHeader } from "../ui/alert-dialog";
+import {
+	AlertDialog,
+	AlertDialogAction,
+	AlertDialogCancel,
+	AlertDialogContent,
+	AlertDialogDescription,
+	AlertDialogFooter,
+	AlertDialogHeader,
+	AlertDialogTitle,
+} from "../ui/alert-dialog";
 import { Button } from "../ui/button";
 import { EditShippingDialog, type ShippingData } from "./EditShippingDialog";
 import { OrderStatusBadge } from "./OrderStatusBadge";

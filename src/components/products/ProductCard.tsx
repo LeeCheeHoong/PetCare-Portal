@@ -143,30 +143,3 @@ export const ProductCardSkeleton = ({ className }: { className?: string }) => {
 		</Card>
 	);
 };
-
-// Usage example with handlers
-export const ProductCardWithHandlers = ({
-	product,
-}: {
-	product: ProductDetail;
-}) => {
-	const handleAddToCart = (productId: string) => {
-		// Add to cart logic - could trigger a mutation
-		console.log("Adding to cart:", productId);
-		// Example: addToCartMutation.mutate(productId)
-	};
-
-	const handleViewDetails = (productId: string) => {
-		// Navigation logic
-		window.location.href = `/products/${productId}`;
-		// Or with React Router: navigate(`/products/${productId}`)
-	};
-
-	return (
-		<ProductCard
-			product={product}
-			onAddToCart={handleAddToCart}
-			onViewDetails={handleViewDetails}
-		/>
-	);
-};

@@ -1,4 +1,4 @@
-import { useNavigate } from "@tanstack/react-router";
+import { useNavigate, useParams, useSearch } from "@tanstack/react-router";
 import { Filter, X } from "lucide-react";
 import { useState } from "react";
 import {
@@ -17,25 +17,32 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useCart } from "../cart/hooks/useCart";
 import { ProductCard } from "./ProductCard";
 
 export const ProductListPage = () => {
 	const navigate = useNavigate();
+	const searchParams = useSearch({
+		from: "__root__",
+	});
+
 	const [filters, setFilters] = useState<ProductFilters>({
 		page: 1,
 		limit: 12,
 		sortBy: "name",
 		sortOrder: "asc",
+		search: searchParams.query as string,
 	});
 
 	const { data, isLoading, error, isFetching } = useProducts(filters);
+	const { addItem } = useCart();
 
 	// Filter handlers
 	const updateFilters = (newFilters: Partial<ProductFilters>) => {
 		setFilters((prev) => ({
 			...prev,
 			...newFilters,
-			page: 1, // Reset to first page when filters change
+			page: newFilters.page ? newFilters.page : 1, // Reset to first page when filters change
 		}));
 	};
 
@@ -252,6 +259,7 @@ export const ProductListPage = () => {
 			{isLoading ? (
 				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
 					{Array.from({ length: 12 }).map((_, i) => (
+						// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
 						<div key={i} className="space-y-3">
 							<Skeleton className="h-48 w-full" />
 							<Skeleton className="h-4 w-3/4" />
@@ -284,6 +292,7 @@ export const ProductListPage = () => {
 									params: { productId: product.id },
 								})
 							}
+							onAddToCart={() => addItem(product.id, 1)}
 						/>
 					))}
 				</div>

@@ -6,6 +6,7 @@ import {
 	Home,
 	LogOut,
 	Package,
+	PawPrint,
 	Settings,
 	Shield,
 	ShoppingBag,
@@ -49,6 +50,7 @@ export function AppSidebar() {
 		{ title: "My Orders", url: "/orders", icon: Package },
 		{ title: "My Pets", url: "/pets", icon: Heart },
 		{ title: "Appointments", url: "/appointments", icon: Calendar },
+		{ title: "Adoption Corner", url: "/adoption", icon: PawPrint },
 	];
 
 	// Admin navigation items
@@ -192,22 +194,22 @@ export function AppSidebar() {
 
 				{/* Settings Section */}
 				{isLoggedIn && (
-				<SidebarGroup>
-					<SidebarGroupLabel>Settings</SidebarGroupLabel>
-					<SidebarGroupContent>
-						<SidebarMenu>
-							<SidebarMenuItem>
-								<SidebarMenuButton asChild>
-									<Link to="/profile">
-										<Settings />
-										<span>Profile Settings</span>
-									</Link>
-								</SidebarMenuButton>
-							</SidebarMenuItem>
-						</SidebarMenu>
-					</SidebarGroupContent>
-				</SidebarGroup>
-			)}
+					<SidebarGroup>
+						<SidebarGroupLabel>Settings</SidebarGroupLabel>
+						<SidebarGroupContent>
+							<SidebarMenu>
+								<SidebarMenuItem>
+									<SidebarMenuButton asChild>
+										<Link to="/profile">
+											<Settings />
+											<span>Profile Settings</span>
+										</Link>
+									</SidebarMenuButton>
+								</SidebarMenuItem>
+							</SidebarMenu>
+						</SidebarGroupContent>
+					</SidebarGroup>
+				)}
 			</SidebarContent>
 
 			<SidebarFooter>
@@ -222,7 +224,7 @@ export function AppSidebar() {
 									>
 										<Avatar className="h-8 w-8 rounded-lg">
 											<AvatarImage
-												src={`https://avatar.vercel.sh/\${userName}.png`}
+												src={`https://avatar.vercel.sh/${userName}.png`}
 												alt={userName}
 											/>
 											<AvatarFallback className="rounded-lg">
@@ -278,14 +280,15 @@ export function AppSidebar() {
 								</DropdownMenuContent>
 							</DropdownMenu>
 						) : (
-							<div className="space-y-2 p-2">
-								<Button asChild className="w-full" size="sm">
-									<Link to="/auth/login">Login</Link>
-								</Button>
-								<Button variant="outline" asChild className="w-full" size="sm">
-									<Link to="/auth/register">Sign Up</Link>
-								</Button>
-							</div>
+							// <div className="space-y-2 p-2">
+							// 	<Button asChild className="w-full" size="sm">
+							// 		<Link to="/auth/login">Login</Link>
+							// 	</Button>
+							// 	<Button variant="outline" asChild className="w-full" size="sm">
+							// 		<Link to="/auth/register">Sign Up</Link>
+							// 	</Button>
+							// </div>
+							<></>
 						)}
 					</SidebarMenuItem>
 				</SidebarMenu>
